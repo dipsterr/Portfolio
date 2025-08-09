@@ -6,7 +6,6 @@ const Header = () => {
 
   const navItems = [
     { name: 'Experience', href: '#experience' },
-    { name: 'Education', href: '#education' },
     { name: 'Projects', href: '#projects' },
     { name: 'Contact', href: '#contact' },
   ]
@@ -17,6 +16,15 @@ const Header = () => {
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
+  }
+
+  const scrollToSection = (href) => {
+    closeMobileMenu()
+    
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
@@ -43,13 +51,13 @@ const Header = () => {
             className="hidden md:flex items-center space-x-8"
           >
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                className="text-neutral-600 hover:text-neutral-900 transition-colors duration-200"
+                onClick={() => scrollToSection(item.href)}
+                className="text-neutral-600 hover:text-neutral-900 transition-colors duration-200 cursor-pointer"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
             <a
               href="https://linkedin.com/in/yourprofile"
@@ -97,14 +105,13 @@ const Header = () => {
         >
           <div className="py-4 space-y-2 border-t border-neutral-200">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                className="block px-4 py-2 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors duration-200"
-                onClick={closeMobileMenu}
+                onClick={() => scrollToSection(item.href)}
+                className="block w-full text-left px-4 py-2 text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50 rounded-lg transition-colors duration-200 cursor-pointer"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
             <a
               href="https://linkedin.com/in/yourprofile"
